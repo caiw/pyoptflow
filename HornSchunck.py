@@ -9,8 +9,8 @@
 import imageio
 from matplotlib.pyplot import show
 #
-from pyoptflow import HornSchunck, getimgfiles
-from pyoptflow.plots import compareGraphs
+from .pyoptflow import HornSchunck, getimgfiles
+from .pyoptflow.plots import compareGraphs
 
 FILTER = 7
 

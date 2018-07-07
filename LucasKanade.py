@@ -5,9 +5,9 @@ This function isn't working yet.
 import imageio
 from scipy.ndimage.filters import gaussian_filter
 #
-from pyoptflow import LucasKanade, getPOI, gaussianWeight
-from pyoptflow import getimgfiles
-from pyoptflow.plots import compareGraphsLK
+from .pyoptflow import LucasKanade, getPOI, gaussianWeight
+from .pyoptflow import getimgfiles
+from .pyoptflow.plots import compareGraphsLK
 
 
 def lucas_kanade(stem, pat:str, kernel:int=5, Nfilter:int=7):
