@@ -5,10 +5,10 @@
 ./HornSchunck.py data/rubic/rubic
 ./HornSchunck.py data/sphere/sphere
 """
-#from scipy.ndimage.filters import gaussian_filter
 from logging import getLogger
 import imageio
 from matplotlib.pyplot import show
+from scipy.ndimage.filters import gaussian_filter
 #
 from .pyoptflow import HornSchunck, getimgfiles
 from .pyoptflow.plots import compareGraphs
@@ -17,7 +17,8 @@ logger = getLogger(__name__)
 
 FILTER = 7
 
-def horn_schunck(stem, pat:str):
+
+def horn_schunck(stem, pat:str, g_filter:int=FILTER):
     flist = getimgfiles(stem, pat)
     logger.info(f"Found {len(flist)} files")
 
@@ -26,14 +27,14 @@ def horn_schunck(stem, pat:str):
         logger.info(f"Loading file {fn1}")
         im1 = imageio.imread(fn1, as_gray=True)
 
- #       Iold = gaussian_filter(Iold,FILTER)
-
         fn2 = flist[i+1]
         im2 = imageio.imread(fn2, as_gray=True)
-#        Inew = gaussian_filter(Inew,FILTER)
+
+        im1 = gaussian_filter(im1, g_filter)
+        im2 = gaussian_filter(im2, g_filter)
 
         U,V = HornSchunck(im1, im2, 1., 100)
-        compareGraphs(U,V, im2, fn=fn2.name)
+        compareGraphs(U,V, im2, fn=fn2.name, scale=10)
 
     return U,V
 
